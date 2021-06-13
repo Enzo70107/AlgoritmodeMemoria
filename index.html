@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Algorithms</title>
+    <script type="text/javascript" src="./javascript/fifo.js"></script>
+    <script type="text/javascript" src="./javascript/rr.js"></script>
+    <script type="text/javascript" src="./javascript/sjf.js"></script>
+  </head>
+  <body>
+    <form id="baseform">
+      <label for="cantproc">Cantidad de procesos:</label>
+      <input type="number" id="cantproc" name="cantproc" />
+      <br />
+      <label for="algorit">Algoritmo a usar:</label>
+      <select name="algorit" id="algorit" form="baseform">
+        <option value="fifo">FIFO</option>
+        <option value="rr">RR</option>
+        <option value="sjf">SJF</option>
+      </select>
+      <br />
+    </form>
+    <button onclick="createfinal()">Probar!</button>
+    <script>
+      function createfinal() {
+        var cantproc = parseInt(document.getElementById("cantproc").value);
+        var algoritmo = document.getElementById("algorit").value;
+        var llegada = [];
+        var duracion = [];
+        for (let i = 0; i < cantproc; i++) {
+          llegada.push(Math.floor(Math.random() * 10));
+          duracion.push(Math.floor(Math.random() * 4) + 2);
+        }
+        console.log(algoritmo);
+        switch (algoritmo) {
+          case "fifo":
+            fifo(cantproc, llegada, duracion);
+            break;
+          case "rr":
+            rr(cantproc, llegada, duracion);
+            break;
+          case "sjf":
+            sjf(cantproc, llegada, duracion);
+            break;
+          default:
+            fifo(cantproc, llegada, duracion);
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
